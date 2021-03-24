@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件传变量</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <input type="text" v-model="inputValue"> -->
+        <!-- <my-component :value="inputValue"></my-component> -->
+        <show-member-info name="koma" :age="25" :detail="{address:'earth', language:'世界语'}"></show-member-info>
+        <my-info name="koma" :age="25" :detail="{address:'earth', language:'世界语'}"></my-info>
+
+    </div>
+    <script >
+        // Vue.component("my-component",{
+        //     props : ['value'],
+        //     template :"<div>输入的值{{value}}</div>"
+        // });
+        Vue.component('show-member-info', {
+        props: {
+            name: {
+                type: String,
+                required: true,
+            },
+            age: {
+                type: Number,
+                validator: function (value) {
+                    return value >= 0 && value <= 130;
+                }                
+            },
+            detail: {
+                type: Object,
+                default: function() {
+                    return {
+                        address: 'US',
+                        language: 'English',
+                    };
+                }
+            },
+        },
+        template: '<div>姓名：{{this.name}}<br/>' 
+            + '年龄：{{this.age}}岁<br/>'
+            + '地址：{{this.detail.address}}<br/>'
+            + '语言：{{this.detail.language}} </div>',
+    });
+        Vue.component("my-info",{
+            props:{
+                name: {
+                type: String,
+                required: true,
+            },
+            age: {
+                type: Number,
+                validator: function (value) {
+                    return value >= 0 && value <= 130;
+                }                
+            },
+            detail: {
+                type: Object,
+                default: function() {
+                    return {
+                        address: 'US',
+                        language: 'English',
+                    };
+                }
+            },
+            },
+            template: '<div>姓名：{{this.name}}<br/>' 
+            + '年龄：{{this.age}}岁<br/>'
+            + '地址：{{this.detail.address}}<br/>'
+            + '语言：{{this.detail.language}} </div>',
+           
+            
+
+        });
+
+        var myAPP =  new Vue({
+            el :'#app',
+            data:{
+                inputValue: '',
+              
+            }
+        })
+    </script>
+</body>
+</html>

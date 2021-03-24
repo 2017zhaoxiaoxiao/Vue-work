@@ -28,8 +28,8 @@
         <com-name :score="50"></com-name>
         <com-name :score="67"></com-name>
         <com-name :score="94"></com-name>
-        <input type="text" v-model="inputScore">{{inputScore}}
-        <compoent-bl :inputScore="inputScore"></compoent-bl>
+        <input type="text" v-model="inputValue">
+        <my-component :value="inputValue"></my-component>
 
     </div>
     <script>
@@ -55,10 +55,10 @@
             }
         });
         // 传递变量
-        Vue.component('compoent-bl',{
-            props:['inputScore'],
-            template: '<div>输入的分数：{{inputScore}}</div>',
-        });
+        Vue.component("my-component",{
+            props : ['value'],
+            template :"<div>输入的值{{value}}</div>"
+        })
         //数据组件
         Vue.component('today-wether',{
             template:'<strong>今天的天气是：{{todayWeather}}</strong>',
@@ -84,7 +84,7 @@
         var myApp = new Vue ({
             el : "#app",
             data : {
-                inputScore:"23",
+                inputValue:"23",
                 games:[
                     { title : "玛丽"},
                     { title : "里脊肉"},
