@@ -6,33 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../vue.min.js"></script>
     <title>组件使用</title>
+
 </head>
 <body>
     <div id="app">
-        <Hello v-bind:message="message"></Hello>
-        <ol>
-            <my-Item v-for="item in games" v-bind:game="item"></my-Item>
-        </ol>
+        <show-list v-for="list in games" v-bind:list="list"></show-list>
+        <my-component2></my-component2>
+        <my-component1></my-component1>
+        <table border="1">
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+            </tr>
+            <!-- 表行组件时注意is属性的应用 -->
+            <tr is="my-component1"></tr>
+            <tr is="my-component2"></tr>
+            <tr is="my-component3"></tr>
+
+        </table>
+        <today-wether></today-wether>
+        <com-name :score="50"></com-name>
+        <com-name :score="67"></com-name>
+        <com-name :score="94"></com-name>
+        <input type="text" v-model="inputScore">{{inputScore}}
+        <compoent-bl :inputScore="inputScore"></compoent-bl>
+
     </div>
     <script>
-        Vue.component("my-Item",{
-            props:['game'],
-            template:'<li> {{game.title}} </li>'
+        //全局组价定义
+        Vue.component('show-list',{
+            props:['list'],
+            template:'<li> {{list.title}}</li>'
         });
-        Vue.component("Hello",{
-            props:['message'],
-            template:'<p> {{message}} </p>'
+        // <!-- 传值组件 -->
+        Vue.component('com-name',{
+            props:['score'],
+            template: '<div>分数：{{score}},等级{{scoreTest}}</div>',
+            computed:{
+                scoreTest:function(){
+                    if(this.score<60)
+                        return '不及格';
+                    else if(this.score<80){
+                        return "良好";
+                    }else{
+                        return "优秀";
+                    }
+                }
+            }
         });
+        // 传递变量
+        Vue.component('compoent-bl',{
+            props:['inputScore'],
+            template: '<div>输入的分数：{{inputScore}}</div>',
+        });
+        //数据组件
+        Vue.component('today-wether',{
+            template:'<strong>今天的天气是：{{todayWeather}}</strong>',
+            data:function (){
+                return {
+                    todayWeather:'雨夹雪'
+                };
+            }
+        });
+        //局部组件定义及使用
+        var component1={
+            template:'<tr><td>1</td><td>局部组件1</td></tr>'
+        }
+        var component2={
+            template:'<tr><td>2</td><td>局部组件2</td></tr>'
+        }
+        var component3={
+            template:'<tr><td>3</td><td>局部组件3</td></tr>'
+        }
+
+     
+
         var myApp = new Vue ({
             el : "#app",
             data : {
-                message:'nija',
+                inputScore:"23",
                 games:[
                     { title : "玛丽"},
                     { title : "里脊肉"},
                     { title : "糖到"}
                 ]
+            },
+            components:{
+                'my-component1':component1,
+                'my-component2':component2,
+                'my-component3':component3,
             }
+
         });
     </script>
 </body>
