@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础语法v-if v-else-if e-else</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        
+        <div>
+            <input type="text" v-model="inputValue" placeholder="请输入您的成绩">
+            <p v-if="inputValue<0">
+               输入成绩不合法
+            </p>
+            <p v-else-if="inputValue<60">
+                {{inputValue}}分 ；很遗憾。您的成绩不合格
+            </p>
+            <p v-else-if="inputValue>=60|| inputValue<80">
+                {{inputValue}}分 ；你的成绩等级:良好
+            </p>
+            <p v-else>
+                {{inputValue}}分 ；恭喜。你的成绩等级:优秀
+            </p>
+        </div>
+    </div>
+    <script>
+        var myApp = new Vue({
+            el : "#app",
+            data : {
+                inputValue:""
+            },
+            methods : {
+               
+            }
+        })
+    </script>
+</body>
+</html>

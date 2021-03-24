@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.min.js"></script>
+    <title>组件使用</title>
+</head>
+<body>
+    <div id="app">
+        <Hello v-bind:message="message"></Hello>
+        <ol>
+            <my-Item v-for="item in games" v-bind:game="item"></my-Item>
+        </ol>
+    </div>
+    <script>
+        Vue.component("my-Item",{
+            props:['game'],
+            template:'<li> {{game.title}} </li>'
+        });
+        Vue.component("Hello",{
+            props:['message'],
+            template:'<p> {{message}} </p>'
+        });
+        var myApp = new Vue ({
+            el : "#app",
+            data : {
+                message:'nija',
+                games:[
+                    { title : "玛丽"},
+                    { title : "里脊肉"},
+                    { title : "糖到"}
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

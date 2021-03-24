@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础语法</title>
+    <script src="../vue.min.js"></script>
+    <style>
+        .Img{
+            width:200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <button type="button" v-if="isShow"  v-on:click="toHide">显示按钮</button>
+        <ul>
+            <li v-for="(item,index) in myInfo">
+                {{index}}
+                姓名： {{item.name}} 
+                发布时间： {{item.publshTime}}
+            </li>
+        </ul>
+        <div>
+            <input type="text" v-model="inputValue" placeholder="请输入内容">
+            您输入的内容：{{inputValue}}
+        </div>
+        <div>
+            <img v-show="isShow" :class="{Img:imgStyle}" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3101694723,748884042&fm=26&gp=0.jpg" alt="">
+            <button @click="showImg">显示图片</button>
+        </div>
+        <div>
+            对象的遍历
+            <ul>
+                <li v-for="(value,key) in myObj">{{key}} :{{ value}}</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var myApp = new Vue({
+            el : "#app",
+            data : {
+                message : "vue 起步",
+                isShow : true,
+                imgStyle:true,
+                inputValue : "",
+                myInfo : [
+                    {
+                        name : "玛丽奥",
+                        publshTime : "2017-12-01"
+                    },
+                    {
+                        name : "玛丽奥",
+                        publshTime : "2017-12-01"
+                    },
+                    {
+                        name : "玛丽奥",
+                        publshTime : "2017-12-01"
+                    },
+                    {
+                        name : "玛丽奥",
+                        publshTime : "2017-12-01"
+                    }
+                ],
+                myObj:{
+                    name:'张三',
+                    school : "hebei normal university",
+                    age : 34,
+                    
+                }
+            },
+            methods : {
+                toHide : function(e){
+                    this.isShow = false;
+                },
+                showImg:function(){
+                    this.isShow = !this.isShow;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>侦听属性watch </title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- watch 监听数据的变化,然后进行相应处理 -->
+    <div id="app">
+       <button type="text" @click="addPrice">加价1000</button>
+       <p>商品价格{{price}}美元</p>
+        <p>商品卖出价格（包含税）{{priceofTax}}</p>
+      
+    </div>
+    <script>
+        var myapp = new Vue({
+            el:'#app',
+            data:{
+                price:0,
+                priceofTax:0
+            },
+           watch:{
+                price : function(newVal,oldVal){
+                    console.log(newVal,oldVal);
+                    this.priceofTax=newVal*1.5;
+                }
+           },
+           methods:{
+            addPrice:function (){
+                this.price+=1000;
+            }
+           }
+        })
+        myapp.price=500;
+    </script>
+</body>
+</html>

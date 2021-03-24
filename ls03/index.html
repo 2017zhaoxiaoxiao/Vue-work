@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>格式化数据filters</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>学习vue进度为{{pregress|toPercent}}</p>
+        <p>{{message|toUpper}}</p>
+    </div>
+    <script>
+        var myapp = new Vue({
+            el:'#app',
+            data:{
+                pregress:0.3,
+                message : "my name is aa"
+            },
+            filters: {
+                toUpper:function(value){
+                    return value.toUpperCase();
+                },
+                toPercent:function(value){
+                    return value*100 +'%';
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

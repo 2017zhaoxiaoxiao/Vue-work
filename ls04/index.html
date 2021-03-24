@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性computed </title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    //computed 应用于数据依赖于元数据的情况，一个数据是有其他数据计算得来的
+  
+    <div id="app">
+       <p>商品价格{{price}}美元</p>
+       <p>商品卖出价格（包含税）{{priceofTax}}</p>
+       <p>商品价格转换人民币{{priceRMB}}</p>
+    </div>
+    <script>
+        var myapp = new Vue({
+            el:'#app',
+            data:{
+                price:500
+            },
+           computed:{
+                priceofTax:function(){
+                    return this.price*1.5;
+                },
+                priceRMB : function(){
+                    var num=this.price /16.74;
+                    return num.toFixed(2);
+                }
+           }
+        })
+    </script>
+</body>
+</html>

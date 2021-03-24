@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>样式绑定 </title>
+    <script src="../vue.min.js"></script>
+</head>
+<style>
+    .toRed{
+        width:200px;
+        height:200px;
+        background-color: red;
+    }
+    .toBig{
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+<body>
+   <!-- 绑定class ,添加样式 -->
+    <div id="app">
+      <p :class="textClass">红色背景框</p>
+      <button type="button" @click="tobeRed">点击添加红色背景</button>
+    </div>
+    <script>
+        var myapp = new Vue({
+            el:'#app',
+            data:{
+                textClass:{
+                    toRed:false,
+                    toBig:false
+                }
+               
+            },
+            methods:{
+                tobeRed : function(){
+                    this.textClass.toBig = !this.textClass.toBig;
+                    this.textClass.toRed = !this.textClass.toRed;
+                }
+            }
+         
+        })
+        myapp.price=500;
+    </script>
+</body>
+</html>

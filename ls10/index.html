@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.min.js"></script>
+    <title>表单控件</title>
+</head>
+<body>
+    <div id="app">
+        <label for="username">用户名</label>
+        <input type="text" id="username" v-model.lazy="user_input"/>
+        <br/>
+        <label for="age">年龄</label>
+        <input type="number" id="age" v-model.number="user_age"/>
+  
+        <br/>
+        <label for="peach">梨</label>
+        <input type="checkbox" id="peach" name="梨" value="梨" v-model="foot_input">
+        <label for="apple">苹果</label>
+        <input type="checkbox" id="apple" name="苹果" value="苹果"  v-model="foot_input">
+        <label for="bannan">香蕉</label>
+        <input type="checkbox" id="bannan" name="香蕉" value="香蕉" v-model="foot_input">
+        <br/>
+        <label for="male">男</label>
+        <input type="radio" id="male" name="男" value="男" v-model="sexData">
+        <label for="famal">女</label>
+        <input type="radio" id="famal" name="女" value="女"  v-model="sexData">
+        <br>
+        <label for="school"></label>
+        <select name="school" id="school" v-model="school">
+            <option value="河北大学">河北大学</option>
+            <option value="河北医科大学">河北医科大学</option>
+            <option value="河北师范大学">河北师范大学</option>
+        </select>
+        
+    </div>
+    <script>
+        var myapp = new Vue({
+            el:"#app",
+            data:{
+                user_input:"",
+                foot_input:[],
+                sexData:"",
+                school:'',
+                user_age:""
+                
+
+
+            }
+        })
+    </script>
+</body>
+</html>
