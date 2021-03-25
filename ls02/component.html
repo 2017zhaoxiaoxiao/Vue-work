@@ -8,44 +8,38 @@
 </head>
 <body>
     <div id="app">
-        <!-- <input type="text" v-model="inputValue"> -->
-        <!-- <my-component :value="inputValue"></my-component> -->
-        <show-member-info name="koma" :age="25" :detail="{address:'earth', language:'世界语'}"></show-member-info>
+        <!-- 父组件向子组件传值 -->
+        <input type="text" v-model="inputValue">
+        <my-component :value="inputValue"></my-component>
         <my-info name="koma" :age="25" :detail="{address:'earth', language:'世界语'}"></my-info>
-
+        <!-- 子组件向父组件中传值 -->
+        <add-num :a="6" :b="5" v-on:add_event="getAddNum"></add-num>
+        {{result}}
+        <!-- slot插槽 -->
+        <say-hello name="赵四">
+            学习吧
+            <span name="sf">皮尔斯</span>
+            <span name="sg">雷阿伦</span>
+            <span name="pg">隆多</span>
+        </say-hello>
     </div>
     <script >
-        // Vue.component("my-component",{
-        //     props : ['value'],
-        //     template :"<div>输入的值{{value}}</div>"
-        // });
-        Vue.component('show-member-info', {
-        props: {
-            name: {
-                type: String,
-                required: true,
-            },
-            age: {
-                type: Number,
-                validator: function (value) {
-                    return value >= 0 && value <= 130;
-                }                
-            },
-            detail: {
-                type: Object,
-                default: function() {
-                    return {
-                        address: 'US',
-                        language: 'English',
-                    };
+        Vue.component('add-num',{
+            props:['a','b'],
+            template:'<button v-on:click="add">加</button>',
+            methods:{
+                add:function(){
+                    
+                    this.$emit('add_event',{
+                        result:this.a+this.b
+                    });
                 }
-            },
-        },
-        template: '<div>姓名：{{this.name}}<br/>' 
-            + '年龄：{{this.age}}岁<br/>'
-            + '地址：{{this.detail.address}}<br/>'
-            + '语言：{{this.detail.language}} </div>',
-    });
+            }
+        })
+        Vue.component("my-component",{
+            props : ['value'],
+            template :"<div>输入的值{{value}}</div>"
+        });   
         Vue.component("my-info",{
             props:{
                 name: {
@@ -76,13 +70,29 @@
             
 
         });
-
+        Vue.component("say-hello",{
+            props:['name'],
+            template:'<div>你好，{{name}}'
+                +'<slot></slot>'
+                +'<slot name="sg"></slot>'
+                +'<slot name="sg"></slot>'
+                +'<slot name="sg"></slot>'
+                +'</div>'
+        })
         var myAPP =  new Vue({
             el :'#app',
             data:{
                 inputValue: '',
-              
+                result:0
+            },
+            methods:{
+                getAddNum:function(pval){
+                    alert("触发父组件中方法");
+                  
+                    this.result = pval.result;
+                }
             }
+
         })
     </script>
 </body>
