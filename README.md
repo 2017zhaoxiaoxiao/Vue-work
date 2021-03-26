@@ -159,3 +159,44 @@ const router = new VueRouter({
   { path: '/bar', component: Bar }
 ]
 })
+## vuex
+    npm install Vuex -save
+1、在src 目录下建文件夹store->store.js
+        import Vue from 'vue'
+        import Vuex from 'vuex'
+        Vue.use(Vuex)
+        var state = {
+        nodeVoteCount: 1,
+        vueVoteCount: 2
+        }
+        export default new Vuex.Store({
+        state,
+        mutations: {
+            ADD1 (state) {
+            state.nodeVoteCount++
+            },
+            ADD2 (state) {
+            state.vueVoteCount++
+            }
+        }
+        })
+
+在main.js中
+import store from './store/store'
+new Vue({
+    el:''
+    store
+})
+组件中使用state和 更改state方式
+   <div>
+          <h3>如何通过node.js对数据进行MD5加密</h3>
+          <input type="button" @click="ADD2" value="投票">票数:{{nodeVoteCount}}
+      </div>
+      <hr/>
+      <div>
+          <h3>真正掌握vuex的使用方法（一）</h3>
+          <input type="button" @click="ADD1" value="投票">票数：{{vueVoteCount}}
+    </div>
+import { mapState, mapMutations } from 'vuex'
+methods: mapMutations(['ADD1', 'ADD2']),
+computed: mapState(['vueVoteCount', 'nodeVoteCount'])
